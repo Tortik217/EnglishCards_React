@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-function Card() {
-
+function Card({word, translate}) {
 
   const [isknown, setIsKnown] = useState(false);
 
@@ -10,13 +9,13 @@ function Card() {
   }
 
   return (
-    <div className="Card d-flex flex-column align-items-center gap-4">
+    <div className="Card d-flex flex-column align-items-center gap-4 border border-primary rounded-3 p-4">
         <div className="word">
-          <h3>Dog</h3>
+          <h3>{word}</h3>
         </div>
         {isknown && (
           <div className="translateWord">
-            <h3>Собака</h3>
+            <h3>{translate}</h3>
           </div>
         )}
 
