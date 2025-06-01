@@ -1,35 +1,39 @@
 import React, { useState } from "react";
 import Card from "../Card/Card";
-import wordsData from "@/data/Words";
+import { useLoaderData } from "react-router-dom";
 
-function EndCardsPanelPanel() {
-
-  const [words, setWords] = useState(wordsData);
+function EndCardsPanel() {
+  const wordsFromLoader = useLoaderData();
+  const [words, setWords] = useState(wordsFromLoader);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-    const currentWord = words[currentIndex];
+  if (!words || words.length === 0) {
+    return <h3>🎉 Все слова выучены!</h3>;
+  }
+
+  const currentWord = words[currentIndex];
 
   function nextCard() {
     setCurrentIndex((prevIndex) =>
       prevIndex + 1 < words.length ? prevIndex + 1 : 0
     );
-  };
+  }
 
-  function handleChoice(id, choice) {
+  function handleChoice(wordText, choice) {
     setWords((prevWords) =>
       prevWords.map((word) =>
-        word.id === id ? { ...word, choice } : word
+        word.word === wordText ? { ...word, choice } : word
       )
     );
   }
 
   return (
     <div className="wrapper d-flex flex-column align-items-center gap-4">
-      <Card 
-        id={currentWord.id} 
-        word={currentWord.word} 
-        translate={currentWord.translate} 
-        nextCard={nextCard} 
+      <Card
+        id={currentWord.id}
+        word={currentWord.word}
+        translate={currentWord.translate}
+        nextCard={nextCard}
         choice={currentWord.choice}
         onChoice={handleChoice}
       />
@@ -40,4 +44,4 @@ function EndCardsPanelPanel() {
   );
 }
 
-export default EndCardsPanelPanel;
+export default EndCardsPanel;

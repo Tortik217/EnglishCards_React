@@ -39,7 +39,7 @@ const words = [
   },
   {
     id: nanoid(5),
-    word: 'Microwawe',
+    word: 'Microwave',
     translate: 'Микроволновка',
     choice: null
   },
