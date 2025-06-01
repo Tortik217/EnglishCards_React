@@ -1,34 +1,47 @@
-import { useState } from "react";
+import setToKnownStorage from "@/data/forStorage";
 
-function Card({word, translate}) {
+import "./Card.css";
 
-  const [isknown, setIsKnown] = useState(false);
+function Card({id, word, translate, nextCard, choice, onChoice}) {
 
-  function changeKnown(param) {
-    setIsKnown(param)
+
+  function handleKnowClick() {
+    setToKnownStorage(word);
+    onChoice(id, "know");
+    nextCard();
   }
 
+   function handleDontKnowClick() {
+    onChoice(id, "dont");
+    setTimeout(() => {nextCard()}, 3000)
+  }
+
+const borderClass = 
+  choice === "know" ? "border-success" :
+  choice === "dont" ? "border-danger" :
+  "border-primary";
+
   return (
-    <div className="Card d-flex flex-column align-items-center gap-4 border border-primary rounded-3 p-4">
+    <div className={`Card d-flex flex-column align-items-center gap-4 rounded-3 p-4 border ${borderClass}`}>
         <div className="word">
           <h3>{word}</h3>
         </div>
-        {isknown && (
+        {choice === "dont" && (
           <div className="translateWord">
             <h3>{translate}</h3>
           </div>
-        )}
+      )}
 
         <div className="buttonForm d-flex gap-2">
           <button
             className="buttonForm_true btn btn-outline-success"
-            onClick={() => changeKnown(false)}
+            onClick={handleKnowClick}
           >
             Know
           </button>
           <button
             className="buttonForm_False btn btn-outline-danger"
-            onClick={() => changeKnown(true)}
+            onClick={handleDontKnowClick}
           >
             Don't know
           </button>

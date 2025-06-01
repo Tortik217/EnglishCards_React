@@ -4,37 +4,44 @@ const words = [
   {
     id: nanoid(5),
     word: 'Dog',
-    translate: 'Собака'
+    translate: 'Собака',
+    choice: null
   },
   {
     id: nanoid(5),
     word: 'Cat',
-    translate: 'Кошка'
+    translate: 'Кошка',
+    choice: null
   },
   {
     id: nanoid(5),
     word: 'Fish',
-    translate: 'Рыба'
+    translate: 'Рыба',
+    choice: null
   },
   {
     id: nanoid(5),
     word: 'Carrot',
-    translate: 'Морковка'
+    translate: 'Морковка',
+    choice: null
   },
   {
     id: nanoid(5),
     word: 'Bagel',
-    translate: 'Пончик'
+    translate: 'Пончик',
+    choice: null
   },
   {
     id: nanoid(5),
     word: 'Doctor',
-    translate: 'Доктор'
+    translate: 'Доктор',
+    choice: null
   },
   {
     id: nanoid(5),
     word: 'Microwawe',
-    translate: 'Микроволновка'
+    translate: 'Микроволновка',
+    choice: null
   },
 
 ]

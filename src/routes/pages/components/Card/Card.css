@@ -1,0 +1,7 @@
+.accept {
+  border-color: green;
+}
+
+.borderDefault {
+  border-color: red !important;
+}
