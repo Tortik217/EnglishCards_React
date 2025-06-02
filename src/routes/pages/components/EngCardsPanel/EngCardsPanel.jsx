@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Card from "../Card/Card";
 import { useLoaderData } from "react-router-dom";
+import { clearCash } from "@/data/forStorage";
 
 function EndCardsPanel() {
   const wordsFromLoader = useLoaderData();
@@ -27,8 +28,10 @@ function EndCardsPanel() {
     );
   }
 
+
   return (
     <div className="wrapper d-flex flex-column align-items-center gap-4">
+      <button onClick={clearCash} className="btn btn-primary">Clear Cash</button>
       <Card
         id={currentWord.id}
         word={currentWord.word}

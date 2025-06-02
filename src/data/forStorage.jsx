@@ -14,3 +14,8 @@ export async function getCards() {
   const knownWords = (await localforage.getItem("knownWords")) || [];
   return words.filter((w) => !knownWords.includes(w.word));
 }
+
+
+  export async  function clearCash() {
+    return localforage.clear()
+  }
