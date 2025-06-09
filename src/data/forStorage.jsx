@@ -17,5 +17,5 @@ export async function getCards() {
 
 
   export async  function clearCash() {
-    return localforage.clear()
+    return await localforage.clear()
   }
