@@ -1,6 +1,6 @@
 import { setToKnownStorage } from "@/data/forStorage";
 
-function Card({ word, translate, nextCard, choice, onChoice }) {
+function Card({ word, translate, nextCard, choice, onChoice, isDisabled }) {
   function handleKnowClick() {
     setToKnownStorage(word);
     onChoice(word, "know");
@@ -32,7 +32,7 @@ function Card({ word, translate, nextCard, choice, onChoice }) {
         </div>
       )}
       <div className="buttonForm d-flex gap-2">
-        <button className="btn btn-outline-success" onClick={handleKnowClick}>
+        <button className="btn btn-outline-success" onClick={handleKnowClick} disabled={isDisabled}>
           Know
         </button>
         <button

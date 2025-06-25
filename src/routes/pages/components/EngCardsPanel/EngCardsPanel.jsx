@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Card from "../Card/Card";
+import "@/routes/pages/components/EngCardsPanel/EngCardsPanel.css";
 import { useLoaderData } from "react-router-dom";
 import { clearCash } from "@/data/forStorage";
 
@@ -12,12 +13,16 @@ function EndCardsPanel() {
     return (
       <div className="wrapper d-flex flex-column align-items-center gap-4">
         <h3>🎉 Все слова выучены!</h3>
-        <button onClick={clearCash} className="btn btn-primary">Clear Cache</button>
+        <button onClick={clearCash} className="btn btn-primary">
+          Clear Cache
+        </button>
       </div>
     );
   }
 
   const currentWord = words[currentIndex];
+
+    const isDisabled = currentWord.choice === 'dont' ? true : false
 
   function nextCard() {
     setCurrentIndex((prevIndex) =>
@@ -54,8 +59,15 @@ function EndCardsPanel() {
         nextCard={nextCard}
         choice={currentWord.choice}
         onChoice={handleChoice}
+        isDisabled={isDisabled}
       />
-      <button onClick={nextCard} className="btn btn-primary">
+      {currentWord.choice === "dont" && (
+        <div class="loader">
+          <div></div>
+        </div>
+      )}
+
+      <button onClick={nextCard} className="btn btn-primary" disabled={isDisabled}>
         Next
       </button>
     </div>
