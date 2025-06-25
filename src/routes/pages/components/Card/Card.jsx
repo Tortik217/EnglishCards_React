@@ -38,6 +38,7 @@ function Card({ word, translate, nextCard, choice, onChoice, isDisabled }) {
         <button
           className="btn btn-outline-danger"
           onClick={handleDontKnowClick}
+          disabled={isDisabled}
         >
           Don't know
         </button>

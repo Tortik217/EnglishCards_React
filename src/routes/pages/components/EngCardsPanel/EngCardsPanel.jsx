@@ -22,7 +22,7 @@ function EndCardsPanel() {
 
   const currentWord = words[currentIndex];
 
-    const isDisabled = currentWord.choice === 'dont' ? true : false
+  const isDisabled = currentWord.choice === 'dont' ? true : false
 
   function nextCard() {
     setCurrentIndex((prevIndex) =>
