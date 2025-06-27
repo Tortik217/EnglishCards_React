@@ -6,7 +6,7 @@ import { clearCash } from "@/data/forStorage";
 
 function EndCardsPanel() {
   const wordsFromLoader = useLoaderData();
-  const [words, setWords] = useState(wordsFromLoader);
+  const [words, setWords] = useState(resetChoices(wordsFromLoader));
   const [currentIndex, setCurrentIndex] = useState(0);
 
   if (!words || words.length === 0) {
@@ -22,12 +22,19 @@ function EndCardsPanel() {
 
   const currentWord = words[currentIndex];
 
-  const isDisabled = currentWord.choice === 'dont' ? true : false
+  const isDisabled = currentWord.choice === "dont" ? true : false;
 
   function nextCard() {
-    setCurrentIndex((prevIndex) =>
-      prevIndex + 1 < words.length ? prevIndex + 1 : 0
-    );
+    if (currentIndex + 1 < words.length) {
+      setCurrentIndex((prev) => prev + 1);
+    } else {
+      const remaining = words
+        .filter((word) => word.choice !== "know")
+        .map((word) => ({ ...word, choice: null }));
+
+      setWords(remaining);
+      setCurrentIndex(0);
+    }
   }
 
   function handleChoice(wordText, userChoice) {
@@ -48,10 +55,21 @@ function EndCardsPanel() {
     }
   }
 
+  function resetChoices(data) {
+    return data.map((word) => ({ ...word, choice: null }));
+  }
+
+  function handleClearCache() {
+    clearCash();
+    const resetWords = resetChoices(wordsFromLoader);
+    setWords(resetWords);
+    setCurrentIndex(0);
+  }
+
   return (
     <div className="wrapper d-flex flex-column align-items-center gap-4">
-      <button onClick={clearCash} className="btn btn-primary">
-        Clear Cash
+      <button onClick={handleClearCache} className="btn btn-primary">
+        Clear Cache
       </button>
       <Card
         word={currentWord.word}
@@ -67,7 +85,11 @@ function EndCardsPanel() {
         </div>
       )}
 
-      <button onClick={nextCard} className="btn btn-primary" disabled={isDisabled}>
+      <button
+        onClick={nextCard}
+        className="btn btn-primary"
+        disabled={isDisabled}
+      >
         Next
       </button>
     </div>
