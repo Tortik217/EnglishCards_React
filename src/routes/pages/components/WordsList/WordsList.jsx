@@ -1,10 +1,7 @@
-import { useLoaderData } from "react-router-dom";
-import React, { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
 export default function WordsList() {
-
-  const wordsFromLoader = useLoaderData()
-  const [words, setWords] = useState(wordsFromLoader);
+  const { words } = useOutletContext();
 
   return (
     <table className=" table table-info">
@@ -16,14 +13,20 @@ export default function WordsList() {
         </tr>
       </thead>
       <tbody>
-        {words.map((word, index) => (
-          <tr key={index}>
-            <td>{word.word}</td>
-            <td>{word.translate}</td>
-            <td>{word.choice}</td>
+        {words.map(({ id, word, translate, choice }) => (
+          <tr key={id}>
+            <td>{word}</td>
+            <td>{translate}</td>
+            <td>
+              {choice === "know"
+                ? "✅ Know"
+                : choice === "dont"
+                ? "❌ Don't Know"
+                : ""}
+            </td>
           </tr>
         ))}
       </tbody>
     </table>
-  )
+  );
 }

@@ -1,13 +1,16 @@
-import React, { useState } from "react";
 import Card from "../Card/Card";
+import { useOutletContext } from "react-router-dom";
 import "@/routes/pages/components/EngCardsPanel/EngCardsPanel.css";
-import { useLoaderData } from "react-router-dom";
-import { clearCash } from "@/data/forStorage";
 
-function EndCardsPanel() {
-  const wordsFromLoader = useLoaderData();
-  const [words, setWords] = useState(resetChoices(wordsFromLoader));
-  const [currentIndex, setCurrentIndex] = useState(0);
+function EngCardsPanel() {
+  const {
+    words,
+    setWords,
+    handleClearCache,
+    clearCash,
+    currentIndex,
+    setCurrentIndex,
+  } = useOutletContext();
 
   if (!words || words.length === 0) {
     return (
@@ -55,17 +58,6 @@ function EndCardsPanel() {
     }
   }
 
-  function resetChoices(data) {
-    return data.map((word) => ({ ...word, choice: null }));
-  }
-
-  function handleClearCache() {
-    clearCash();
-    const resetWords = resetChoices(wordsFromLoader);
-    setWords(resetWords);
-    setCurrentIndex(0);
-  }
-
   return (
     <div className="wrapper d-flex flex-column align-items-center gap-4">
       <button onClick={handleClearCache} className="btn btn-primary">
@@ -80,7 +72,7 @@ function EndCardsPanel() {
         isDisabled={isDisabled}
       />
       {currentWord.choice === "dont" && (
-        <div class="loader">
+        <div className="loader">
           <div></div>
         </div>
       )}
@@ -96,4 +88,4 @@ function EndCardsPanel() {
   );
 }
 
-export default EndCardsPanel;
+export default EngCardsPanel;

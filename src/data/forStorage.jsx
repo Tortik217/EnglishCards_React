@@ -10,6 +10,10 @@ export async function setToKnownStorage(word) {
   }
 }
 
+export async function getAllWords() {
+  return words;
+}
+
 export async function getCards() {
   const knownWords = (await localforage.getItem("knownWords")) || [];
   return words.filter((w) => !knownWords.includes(w.word));
