@@ -39,36 +39,16 @@ function EngCardsPanel() {
       setCurrentIndex(0);
     }
     console.log(words);
-    
   }
 
   function prevCard() {
     if (currentIndex - 1 > 0) {
-      setCurrentIndex(prev => prev - 1);
+      setCurrentIndex((prev) => prev - 1);
     } else {
-
       setCurrentIndex(words.length - 1);
     }
     console.log(words);
   }
-
-  // function handleChoice(wordText, userChoice) {
-  //   if (userChoice === "know") {
-  //     setWords((prevWords) => {
-  //       const newWords = prevWords.filter((word) => word.word !== wordText);
-  //       setCurrentIndex((prevIndex) =>
-  //         prevIndex >= newWords.length ? 0 : prevIndex
-  //       );
-  //       return newWords;
-  //     });
-  //   } else {
-  //     setWords((prevWords) =>
-  //       prevWords.map((word) =>
-  //         word.word === wordText ? { ...word, choice: userChoice } : word
-  //       )
-  //     );
-  //   }
-  // }
 
   function handleChoice(wordText, userChoice) {
     setWords((prevWords) =>
@@ -96,20 +76,22 @@ function EngCardsPanel() {
           <div></div>
         </div>
       )}
-      <button
-        onClick={prevCard}
-        className="btn btn-primary"
-        disabled={isDisabled}
-      >
-        Prev
-      </button>
-      <button
-        onClick={nextCard}
-        className="btn btn-primary"
-        disabled={isDisabled}
-      >
-        Next
-      </button>
+      <div className="buttons d-flex gap-3">
+        <button
+          onClick={prevCard}
+          className="btn btn-primary"
+          disabled={isDisabled}
+        >
+          Prev
+        </button>
+        <button
+          onClick={nextCard}
+          className="btn btn-primary"
+          disabled={isDisabled}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }
